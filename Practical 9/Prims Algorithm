@@ -1,0 +1,42 @@
+print("================================")
+print("       PRIM'S ALGORITHM")
+print("================================")
+
+n = int(input("Enter number of vertices: "))
+
+print("Enter the adjacency matrix:")
+graph = []
+
+for i in range(n):
+    row = list(map(int, input().split()))
+    graph.append(row)
+
+visited = [False] * n
+visited[0] = True
+
+edges = 0
+total_cost = 0
+
+print("\nEdges in Minimum Spanning Tree:")
+
+while edges < n - 1:
+    minimum = float('inf')
+    x = 0
+    y = 0
+
+    for i in range(n):
+        if visited[i]:
+            for j in range(n):
+                if not visited[j] and graph[i][j] != 0:
+                    if graph[i][j] < minimum:
+                        minimum = graph[i][j]
+                        x = i
+                        y = j
+
+    print(f"{x} -- {y}  Cost = {minimum}")
+
+    total_cost += minimum
+    visited[y] = True
+    edges += 1
+
+print("\nMinimum Cost =", total_cost)
